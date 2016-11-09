@@ -6,11 +6,11 @@ extern int randomNumberGen(int seed);
 int main(int argc, char* argv[])
 {
     int random_number;
-    int i; len;
+    int i, len;
     char filename[20];
     
     strcpy(filename, "file_");               //copies "file_" string into the character array called 'filename'
-    printf("filename = %s\n", filename)      //outputs (prints)%string stored in 'filename'
+    printf("filename = %s length = %d\n", filename, strlen(filename));      //outputs (prints)%string stored in 'filename'
     
     for (i=0; i<10; i++)
     {
@@ -27,4 +27,3 @@ int randomNumberGen(int seed)
     number = seed * 1103515245 + 12345;
     return (unsigned int)(number/65536) % 32768;
 }
-/**********************************************************
