@@ -54,4 +54,34 @@ int randomNumberGen(int seed)
     return (unsigned int)(number/65536) % 32768;
 }
 
-int creat
+int create_list_of_numbers()
+{
+    FILE *fp;
+    int i, random_number, len;
+    char filename[20];
+    
+    for(i=0; i<10; i++)
+    {
+        strcpy(filename, "file_");                                 //copies "file_" string into the character array called 'filename'
+        len = strlen(filename);
+        filename[len] = '0'+ i;                                       //overwrites /0 null character with an '0'
+        filename[len + 1] = '\0';                               //appends \0/NULL at the end of the string
+        strcat(filename, ".txt");                              //concats .txt at the end of our filename 
+        printf("filename = %s\n",filename);
+
+        fp = fopen(filename, "r");                          //opens (pointer to)'filename' in write mode  
+        if ( fp == NULL )                                 //if null is returned, *fp is not valid
+        {
+            printf("Error opening file: %s\n", filename);
+            return 1;                               
+        }
+        fscanf(fp, "%d", &random_number);             //passes adress of random mnumber into our fp
+        add_number_to_list(random_number);
+        
+        fclose(fp);
+        
+    }
+}
+
+int add_number_to_list(int number)
+    
