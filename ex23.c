@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 
+
 extern int randomNumberGen(int seed); 
 
+
 int main(int argc, char* argv[])
+
 {
     int random_number;
     int i, len;
@@ -12,9 +15,11 @@ int main(int argc, char* argv[])
 
 
     for (i=0; i<10; i++)
+    
     {
         random_number = randomNumberGen(i);
         printf("seed = %d, rand = %d\n", i, random_number);
+       
         
         strcpy(filename, "file_");                                 //copies "file_" string into the character array called 'filename'
         len = strlen(filename);
@@ -23,12 +28,14 @@ int main(int argc, char* argv[])
         strcat(filename, ".txt");                              //concats .txt at the end of our filename 
         printf("filename = %s\n",filename);
 
-        fp = fopen(filename, "w");                          //opens 'filename' in write mode  
+        fp = fopen(filename, "w");                          //opens (pointer to)'filename' in write mode  
         if ( fp == NULL )                                 //if null is returned, *fp is not valid
         {
             printf("Error opening file: %s\n", filename);
             return 1;                               
         }
+        fprintf(fp, "%d\n", random_number);             //writes random_number into 'i'th' file
+        fclose(fp);
     }
     return 0;
 }
