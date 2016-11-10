@@ -10,7 +10,15 @@ int main(int argc, char* argv[])
     char filename[20];
     
     strcpy(filename, "file_");               //copies "file_" string into the character array called 'filename'
-    printf("filename = %s length = %d\n", filename, strlen(filename));      //outputs (prints)%string stored in 'filename'
+    len = strlen(filename);
+    printf("filename = %s length = %d\n", filename, len);      //outputs (prints)%string stored in 'filename'
+    filename[len] = '0';                     //overwrites /0 null character with an '0'
+    filename[len + 1] = '\0';                //appends \0/NULL at the end of the string
+    len = strlen(filename);
+    printf("filename = %s length = %d\n", filename, len);
+    
+    strcat(filename, ".txt");                //concats .txt at the end of our filename 
+    printf("filename = %s length = %d\n", filename, strlen(filename));
     
     for (i=0; i<10; i++)
     {
