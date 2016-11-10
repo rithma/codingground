@@ -8,18 +8,9 @@ int main(int argc, char* argv[])
     int random_number;
     int i, len;
     char filename[20];
-  /*  
-    strcpy(filename, "file_");                                 //copies "file_" string into the character array called 'filename'
-    len = strlen(filename);
-    printf("filename = %s length = %d\n", filename, len);      //outputs (prints)%string stored in 'filename'
-    filename[len] = '0'+ 1;                                       //overwrites /0 null character with an '0'
-    filename[len + 1] = '\0';                                  //appends \0/NULL at the end of the string
-    len = strlen(filename);
-    printf("filename = %s length = %d\n", filename, len);
-    
-    strcat(filename, ".txt");                                  //concats .txt at the end of our filename 
-    printf("filename = %s length = %d\n", filename, strlen(filename));
-    */
+    FILE *fp;
+
+
     for (i=0; i<10; i++)
     {
         random_number = randomNumberGen(i);
@@ -28,10 +19,16 @@ int main(int argc, char* argv[])
         strcpy(filename, "file_");                                 //copies "file_" string into the character array called 'filename'
         len = strlen(filename);
         filename[len] = '0'+ i;                                       //overwrites /0 null character with an '0'
-        filename[len + 1] = '\0';                                  //appends \0/NULL at the end of the string
-        strcat(filename, ".txt");                                  //concats .txt at the end of our filename 
+        filename[len + 1] = '\0';                               //appends \0/NULL at the end of the string
+        strcat(filename, ".txt");                              //concats .txt at the end of our filename 
         printf("filename = %s\n",filename);
-    
+
+        fp = fopen(filename, "w");                          //opens 'filename' in write mode  
+        if ( fp == NULL )                                 //if null is returned, *fp is not valid
+        {
+            printf("Error opening file: %s\n", filename);
+            return 1;                               
+        }
     }
     return 0;
 }
