@@ -1,12 +1,18 @@
 #include <stdio.h>
 #include <string.h>
 
-
 extern int randomNumberGen(int seed); 
 
+struct num_and_string
+{
+    int number;
+    char *poetry; 
+    struct num_and_string *next;
+};
+
+sturct num_and_string *ns_list;
 
 int main(int argc, char* argv[])
-
 {
     int random_number;
     int i, len;
@@ -15,12 +21,10 @@ int main(int argc, char* argv[])
 
 
     for (i=0; i<10; i++)
-    
-    {
+       {
         random_number = randomNumberGen(i);
         printf("seed = %d, rand = %d\n", i, random_number);
        
-        
         strcpy(filename, "file_");                                 //copies "file_" string into the character array called 'filename'
         len = strlen(filename);
         filename[len] = '0'+ i;                                       //overwrites /0 null character with an '0'
@@ -37,6 +41,9 @@ int main(int argc, char* argv[])
         fprintf(fp, "%d\n", random_number);             //writes random_number into 'i'th' file
         fclose(fp);
     }
+    
+    create_list_of_numbers();
+    
     return 0;
 }
 
@@ -46,3 +53,5 @@ int randomNumberGen(int seed)
     number = seed * 1103515245 + 12345;
     return (unsigned int)(number/65536) % 32768;
 }
+
+int creat
