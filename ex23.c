@@ -18,6 +18,8 @@ int main(int argc, char* argv[])
     int i, len;
     char filename[20];
     FILE *fp;
+    
+    ns_list = NULL;               //initialize list indicating that the list is empty
 
 
     for (i=0; i<10; i++)
@@ -84,4 +86,9 @@ int create_list_of_numbers()
 }
 
 int add_number_to_list(int number)
+{
+    struct num_and_string *new_node;
+    
+    new_node = malloc(sizeof(struct num_and_string));
+    
     
