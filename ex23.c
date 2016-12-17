@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 extern int randomNumberGen(int seed); 
 
@@ -10,7 +11,7 @@ struct num_and_string
     struct num_and_string *next;
 };
 
-sturct num_and_string *ns_list;
+struct num_and_string *ns_list;
 
 int main(int argc, char* argv[])
 {
@@ -85,10 +86,52 @@ int create_list_of_numbers()
     }
 }
 
+
+
+
+
+
+
+
+
+
+
 int add_number_to_list(int number)
 {
     struct num_and_string *new_node;
     
-    new_node = malloc(sizeof(struct num_and_string));
+    new_node = (struct num_and_string *)malloc(sizeof(struct num_and_string));
+    if(new_node == NULL)
+    {
+        printf("error allocating memory: %d\n", number);
+        return 1;
+    }
     
-    
+    new_node->number = number;
+    new_node->poetry = NULL;
+    new_node->next = NULL;          //when new element is added, the next element is always NULL
+ 
+    if (ns_list == NULL)  //the list is empty
+    {
+        ns_list = new_node;
+        return 0;
+    }
+    else                     //list is not empty
+    {                        //we want to traverse to the end of the listand add the new node to the end of the list 
+        temp_node = ns_list;       //(NS LIST IS LIST HEAD)
+
+        while (temp_node->next != NULL)  //while not null,  hop to the next
+        {
+            temp_node = temp_node->next;
+        }    
+        
+        //Here, temp_node is the last element of the list
+        
+        temp_node->next = new_node;
+    }                        
+    return 0;
+}
+
+
+
+// for(temp_node=ns_list; temp_node->next != NULL; temp_node->next);
